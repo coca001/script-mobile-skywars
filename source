@@ -325,8 +325,21 @@ OPSection:NewButton("Hat spin Fe", "Info", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/wZn7yAB7",true))()
 end)
 
-script.Parent.Active = true
-script.Parent.Draggable = true
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+ 
+mouse.Button1Down:Connect(function()
+	script.Parent.Holding.Value = true
+end)
+ 
+mouse.Button1Up:Connect(function()
+	script.Parent.Holding.Value = false
+end)
+ 
+mouse.Move:Connect(function()
+	if script.Parent.Holding.Value == true then
+		script.Parent.Frame.Position = UDim2.new(0,mouse.X,0,mouse.Y)
+	end
 end)
 
 --extras on run
